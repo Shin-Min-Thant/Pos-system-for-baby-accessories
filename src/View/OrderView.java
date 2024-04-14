@@ -292,7 +292,7 @@ public class OrderView extends JFrame {
 					ItemController ic = new ItemController();
 					im.setItem_id(cboItemID.getSelectedItem().toString());
 					try {
-						int randomNumber = generateRandomNumber(1000, 9999);
+						String randomNumber = generateRandomNumber(1000, 9999);
 						strquery = MySqlQueries.getItemData1(im);
 						strdataitem[1] = strquery[0];  //id
 						strdataitem[2] = strquery[1];  //name
@@ -305,7 +305,7 @@ public class OrderView extends JFrame {
 						strdataitem[7]=MySqlQueries.getBrandName(strquery[3]); //branid
 						strdataitem[8]=MySqlQueries.getTypeName(strquery[4]);  //tyepid
 						lblItemtype.setText(strdataitem[8]);
-				        lblNumber.setText(Integer.toString(randomNumber));
+				        lblNumber.setText(randomNumber);
 					}catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -726,7 +726,8 @@ public class OrderView extends JFrame {
 		Image img = imgIco.getImage().getScaledInstance(lblPhoto2.getWidth(), lblPhoto2.getHeight(), Image.SCALE_SMOOTH);
 		lblPhoto2.setIcon(new ImageIcon(img));
 	}
-	 public static int generateRandomNumber(int minValue, int maxValue) {
-	        return (int) (Math.random() * (maxValue - minValue + 1)) + minValue;
-	   }
+	 public static String generateRandomNumber(int minValue, int maxValue) {
+	        int random= (int) (Math.random() * (maxValue - minValue + 1)) + minValue;
+	        return "#" + random;
+	 }
 }

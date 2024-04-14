@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import Connection.ClsDBConnection;
 import Model.BrandModel;
@@ -56,7 +57,7 @@ public class BrandController {
 		return result;
 	}
 	
-	public int delete(BrandModel dain) {
+	public int delete(BrandModel dain)throws SQLException {
 		int result =0;
 		String sql = "delete from pos_baby.brand where brand_id=?";
 		try {
@@ -64,9 +65,9 @@ public class BrandController {
 			ps.setString(1, dain.getBrand_id());
 			
 			result =  ps.executeUpdate();
-		}catch(SQLException e) {
+		}catch(MySQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"Fail delete,Inter Error","Fail",JOptionPane.ERROR_MESSAGE);
+	        JOptionPane.showMessageDialog(null, "Cannot delete the brand because it is referenced by another record.", "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 		return result;
 	}

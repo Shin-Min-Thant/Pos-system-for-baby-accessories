@@ -317,19 +317,26 @@ public class DeliverView extends JFrame {
 				if(!sm.getDeliver_id().isBlank()) {
 					if(JOptionPane.showConfirmDialog(null,"Are you sure you want to delete?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) {
 						DeliverController sc = new DeliverController();
-						int rs = sc.delete(sm,path);
-						if(rs==1) {
-							
-							JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
-                           
-							AutoID();
-							showList();
-							clear();
-							
-						}else {
-							System.out.println(rs);
-							JOptionPane.showMessageDialog(null,"Delete fails");
+						int rs;
+						try {
+							rs = sc.delete(sm,path);
+							if(rs==1) {
+								
+								JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
+	                           
+								AutoID();
+								showList();
+								clear();
+								
+							}else {
+								System.out.println(rs);
+								JOptionPane.showMessageDialog(null,"Delete fails");
+							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
+						
 					}
 		
 			}
@@ -422,11 +429,11 @@ public class DeliverView extends JFrame {
 		panel.add(btnUpload);
 		
 		lblPhoto = new JLabel("");
-		lblPhoto.setBounds(0, 0, 885, 286);
+		lblPhoto.setBounds(0, 0, 885, 600);
 		panel.add(lblPhoto);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Deliver ID:");
-		lblNewLabel_1_2 .setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_2 .setForeground(new Color(0, 0, 0));
 		lblNewLabel_1_2 .setFont(new Font("Pyidaungsu", Font.BOLD, 15));
 		lblNewLabel_1_2.setBounds(428, 320, 89, 17);
 		contentPane.add(lblNewLabel_1_2);
@@ -594,6 +601,7 @@ public class DeliverView extends JFrame {
 	 		txtPhone.setText("");
 	 		txtEmail.setText("");
 	 		txtCapacity.setText("");
+	 		lblPhoto.setIcon(null);
 	 		txtName.requestFocus(true);
 	    }
 	public void showList() {

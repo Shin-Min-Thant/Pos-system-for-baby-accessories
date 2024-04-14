@@ -355,21 +355,27 @@ public class ItemView extends JFrame {
 				if(!im.getItem_id().isBlank()) {
 					if(JOptionPane.showConfirmDialog(null,"Are you sure you want to delete?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) {
 						ItemController ic = new ItemController();
-						int rs = ic.delete(im,path);
-						System.out.println(rs);
-						if(rs==1) {
-							JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
-							try {
-								AutoID();
-							} catch (ClassNotFoundException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+						int rs;
+						try {
+							rs = ic.delete(im,path);
+							if(rs==1) {
+								JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
+								try {
+									AutoID();
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								showList();
+								clear();
+							}else {
+								JOptionPane.showMessageDialog(null,"Delete fails");
 							}
-							showList();
-							clear();
-						}else {
-							JOptionPane.showMessageDialog(null,"Delete fails");
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
+						
 					}
 		
 			}

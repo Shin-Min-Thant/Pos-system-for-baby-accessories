@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import Model.TypeModel;
 import Connection.ClsDBConnection;
@@ -60,17 +61,17 @@ public class TypeController {
 		
 	}
 	
-	public int delete(TypeModel dain) {
+	public int delete(TypeModel dain) throws SQLException{
 		int result =0;
 		String sql = "delete from pos_baby.type where type_id=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, dain.getType_id());
 			result = ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (MySQLIntegrityConstraintViolationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"Insert Fail,Inter error","Fail", JOptionPane.ERROR_MESSAGE);
+	        JOptionPane.showMessageDialog(null, "Cannot delete the type because it is referenced by another record.", "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 		return result;
 		

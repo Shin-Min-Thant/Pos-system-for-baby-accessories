@@ -231,7 +231,12 @@ public class CustomerView extends JFrame {
 									rs = cc.insert(cm,path);
 									if(rs==1) {
 										JOptionPane.showMessageDialog(null, "Save Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
-										AutoID();
+										try {
+											AutoID();
+										} catch (ClassNotFoundException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										}
 										showList();
 										clear();
 									}
@@ -316,7 +321,7 @@ public class CustomerView extends JFrame {
 										clear();
 										showList();
 									}
-								} catch (FileNotFoundException e1) {
+								} catch (FileNotFoundException | ClassNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
@@ -344,16 +349,29 @@ public class CustomerView extends JFrame {
 		        if (!cm.getCustomer_id().isBlank()) {
 		            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 		                CustomerController cc = new CustomerController();
-		                int rs = cc.delete(cm, path);
-						if (rs == 1) {
-						    JOptionPane.showMessageDialog(null, "Delete Successfully", "Successfully", JOptionPane.INFORMATION_MESSAGE);
-						    AutoID();
-						    showList();
-						    clear();
-						} else {
-						    System.out.println(rs);
-						    JOptionPane.showMessageDialog(null, "Delete fails");
+		                int rs;
+						try {
+							rs = cc.delete(cm, path);
+							if (rs == 1) {
+							    JOptionPane.showMessageDialog(null, "Delete Successfully", "Successfully", JOptionPane.INFORMATION_MESSAGE);
+							    try {
+									AutoID();
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							    showList();
+							    clear();
+							} else {
+								System.out.println(rs);
+								JOptionPane.showMessageDialog(null, "Delete fails");
+							    
+							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
+						
 		            }
 		        }
 		    }
@@ -500,17 +518,17 @@ public class CustomerView extends JFrame {
 		});
 		scrollPane.setViewportView(tblCustomer);
 		displayImg();
-		AutoID();
+		try {
+			AutoID();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		createTable();
 		showList();
 	}
-	public void AutoID() {
-		try {
-			lblCustomerID.setText(AutoID.getAutoID("customer_id", "customer", "CU-"));
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void AutoID() throws ClassNotFoundException {
+		lblCustomerID.setText(AutoID.getAutoID("customer_id", "customer", "CU-"));
 	}
 	public void setColumnWidth(int index , int width,int height)
 	{

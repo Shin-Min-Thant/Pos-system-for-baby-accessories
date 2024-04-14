@@ -333,19 +333,26 @@ public class SupplierView extends JFrame {
 				if(!sm.getSupplier_id().isBlank()) {
 					if(JOptionPane.showConfirmDialog(null,"Are you sure you want to delete?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) {
 						SupplierController sc = new SupplierController();
-						int rs = sc.delete(sm,path);
-						if(rs==1) {
-							
-							JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
-                           
-							AutoID();
-							showList();
-							clear();
-							
-						}else {
-							System.out.println(rs);
-							JOptionPane.showMessageDialog(null,"Delete fails");
+						int rs;
+						try {
+							rs = sc.delete(sm,path);
+							if(rs==1) {
+								
+								JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
+	                           
+								AutoID();
+								showList();
+								clear();
+								
+							}else {
+								System.out.println(rs);
+								JOptionPane.showMessageDialog(null,"Delete fails");
+							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
+						
 					}
 		
 			}

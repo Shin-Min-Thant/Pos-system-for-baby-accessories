@@ -86,13 +86,13 @@ public class DashboardView extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Pos system for Baby Accessories ");
-		lblNewLabel.setForeground(new Color(255, 255, 0));
+		lblNewLabel.setForeground(new Color(64, 0, 64));
 		lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
-		lblNewLabel.setBounds(97, 14, 314, 34);
+		lblNewLabel.setBounds(104, 14, 314, 34);
 		panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Welcome to Our Admin Dashboard");
-		lblNewLabel_1.setForeground(new Color(255, 255, 0));
+		lblNewLabel_1.setForeground(new Color(64, 0, 64));
 		lblNewLabel_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(128, 48, 249, 28);
 		panel.add(lblNewLabel_1);

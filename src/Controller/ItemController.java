@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.Blob;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import Connection.ClsDBConnection;
 import Model.BrandModel;
@@ -86,7 +87,7 @@ public class ItemController {
 			
 	}
 	
-	public int delete(ItemModel dain,String path2) {
+	public int delete(ItemModel dain,String path2) throws SQLException{
 		int result =0;
 		String sql = "delete from pos_baby.item where item_id=? and qty=0";
 		try {
@@ -94,10 +95,10 @@ public class ItemController {
 			ps.setString(1, dain.getItem_id());
 			System.out.println(dain.getItem_id());
 			result = ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (MySQLIntegrityConstraintViolationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"Delete Fail,Inter error","Fail", JOptionPane.ERROR_MESSAGE);
+	        JOptionPane.showMessageDialog(null, "Cannot delete the item because it is referenced by another record.", "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 		return result;
 			

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.Blob;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import Connection.ClsDBConnection;
 import Model.SupplierModel;
@@ -81,17 +82,17 @@ public class SupplierController {
 		
 	}
 	
-	public int delete(SupplierModel dain,String path2) {
+	public int delete(SupplierModel dain,String path2) throws SQLException{
 		int result =0;
 		String sql = "delete from pos_baby.supplier where supplier_id=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, dain.getSupplier_id());
 			result = ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (MySQLIntegrityConstraintViolationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"Insert Fail,Inter error","Fail", JOptionPane.ERROR_MESSAGE);
+	        JOptionPane.showMessageDialog(null, "Cannot delete the supplier because it is referenced by another record.", "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 		return result;
 		

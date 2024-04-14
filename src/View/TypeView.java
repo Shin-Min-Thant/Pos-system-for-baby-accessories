@@ -234,27 +234,34 @@ public class TypeView extends JFrame {
 				if(!bm.getType_id().isBlank()) {
 					if(JOptionPane.showConfirmDialog(null,"Are you sure you want to delete?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) {
 						TypeController bc = new TypeController();
-						int rs = bc.delete(bm);
-						if(rs==1) {
-							
-							try {
-								JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
-
+						int rs;
+						try {
+							rs = bc.delete(bm);
+							if(rs==1) {
+								
 								try {
-									AutoID();
-								} catch (ClassNotFoundException e1) {
+									JOptionPane.showMessageDialog(null,"Delete Successfully","Successfully", JOptionPane.INFORMATION_MESSAGE);
+
+									try {
+										AutoID();
+									} catch (ClassNotFoundException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									showList();
+									clear();
+								} catch (SQLException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								showList();
-								clear();
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+							}else {
+								JOptionPane.showMessageDialog(null,"Delete fails");
 							}
-						}else {
-							JOptionPane.showMessageDialog(null,"Delete fails");
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
+						
 					}
 		
 			}

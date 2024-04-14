@@ -136,7 +136,7 @@ public class LoginView extends JFrame {
 							DashboardView dv = new DashboardView();
 							dv.setVisible(true);
 						}else {
-							JOptionPane.showMessageDialog(null, "Fail Login","Fail",JOptionPane.ERROR_MESSAGE );
+							JOptionPane.showMessageDialog(null, "Password and Username are wrong","Fail",JOptionPane.ERROR_MESSAGE );
                             clear();						}
 					} catch (HeadlessException | SQLException e1) {
 						// TODO Auto-generated catch block
