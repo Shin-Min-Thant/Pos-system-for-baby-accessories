@@ -58,6 +58,7 @@ public class TypeView extends JFrame {
 	int r=0;
 	String typeID=null;
 	private JLabel lblPhoto;
+	private JScrollPane scrollPane_1;
 	/**
 	 * Launch the application.
 	 */
@@ -313,9 +314,12 @@ public class TypeView extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(22, 14, 599, 130);
+		panel_1.add(scrollPane_1);
+		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 14, 599, 130);
-		panel_1.add(scrollPane);
+		scrollPane_1.setViewportView(scrollPane);
 		
 		tblType = new JTable();
 		tblType.setBackground(new Color(211, 211, 211));

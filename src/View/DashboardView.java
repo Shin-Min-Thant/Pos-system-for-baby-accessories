@@ -14,6 +14,8 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.border.LineBorder;
 import javax.swing.JSpinner;
+import javax.swing.UIManager;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -116,18 +118,7 @@ public class DashboardView extends JFrame {
 		panel_1.setLayout(null);
 		
 		pType = new JPanel();
-		pType.setBackground(new Color(255, 255, 255));
-		pType.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pType.setBounds(23, 204, 123, 51);
-		panel_1.add(pType);
-		pType.setLayout(null);
-		
-		JLabel lblNewLabel_3 = new JLabel("Edit Type");
-		lblNewLabel_3.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-		lblNewLabel_3.setBounds(8, 14, 76, 17);
-		pType.add(lblNewLabel_3);
-		lblEdit = new JLabel("");
-		lblEdit.addMouseListener(new MouseAdapter() {
+		pType.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TypeView tv;
@@ -140,8 +131,27 @@ public class DashboardView extends JFrame {
 					e1.printStackTrace();
 				}
 			}
+		    public void mouseEntered(MouseEvent e) {
+		    	pType.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	pType.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+            }
 			
 		});
+		pType.setBackground(new Color(255, 255, 255));
+		pType.setBorder(new LineBorder(new Color(0, 0, 0)));
+		pType.setBounds(23, 204, 123, 51);
+		panel_1.add(pType);
+		pType.setLayout(null);
+		
+		JLabel lblNewLabel_3 = new JLabel("Edit Type");
+		lblNewLabel_3.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+		lblNewLabel_3.setBounds(8, 14, 76, 17);
+		pType.add(lblNewLabel_3);
+		lblEdit = new JLabel("");
 		lblEdit.setBounds(46, 0, 69, 49);
 		pType.add(lblEdit);
 		
@@ -153,6 +163,14 @@ public class DashboardView extends JFrame {
 				bv.setVisible(true);
 				bv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			  public void mouseEntered(MouseEvent e) {
+				  pBrand.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pBrand.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pBrand.setLayout(null);
 		pBrand.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -180,6 +198,14 @@ public class DashboardView extends JFrame {
 				iv.setVisible(true);
 				iv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			  public void mouseEntered(MouseEvent e) {
+				  pItem.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pItem.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pItem.setLayout(null);
 		pItem.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -211,6 +237,14 @@ public class DashboardView extends JFrame {
 				pv.setVisible(true);
 				pv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			 public void mouseEntered(MouseEvent e) {
+				 pPurchase.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pPurchase.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pPurchase.setLayout(null);
 		pPurchase.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -242,6 +276,14 @@ public class DashboardView extends JFrame {
 				sv.setVisible(true);
 				sv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			 public void mouseEntered(MouseEvent e) {
+				 pSupplier.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pSupplier.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pSupplier.setLayout(null);
 		pSupplier.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -273,6 +315,14 @@ public class DashboardView extends JFrame {
 				cv.setVisible(true);
 				cv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pCustomer.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pCustomer.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pCustomer.setLayout(null);
 		pCustomer.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -296,6 +346,14 @@ public class DashboardView extends JFrame {
 				sv.setVisible(true);
 				sv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pSale.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pSale.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pSale.setLayout(null);
 		pSale.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -325,6 +383,14 @@ public class DashboardView extends JFrame {
 					e1.printStackTrace();
 				}
 			}
+			public void mouseEntered(MouseEvent e) {
+				pOrder.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pOrder.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pOrder.setLayout(null);
 		pOrder.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -341,20 +407,28 @@ public class DashboardView extends JFrame {
 		pOrder.add(lblOrder);
 		
 		pDeliver = new JPanel();
-		pDeliver.setLayout(null);
-		pDeliver.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pDeliver.setBounds(521, 299, 123, 51);
-		panel_1.add(pDeliver);
-		
-		JLabel lblNewLabel_3_2_1_1_1 = new JLabel("Edit Deliver");
-		lblNewLabel_3_2_1_1_1.addMouseListener(new MouseAdapter() {
+		pDeliver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				DeliverView dv = new DeliverView();
 				dv.setVisible(true);
 				dv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pDeliver.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pDeliver.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
+		pDeliver.setLayout(null);
+		pDeliver.setBorder(new LineBorder(new Color(0, 0, 0)));
+		pDeliver.setBounds(521, 299, 123, 51);
+		panel_1.add(pDeliver);
+		
+		JLabel lblNewLabel_3_2_1_1_1 = new JLabel("Edit Deliver");
 		lblNewLabel_3_2_1_1_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 		lblNewLabel_3_2_1_1_1.setBounds(8, 14, 73, 17);
 		pDeliver.add(lblNewLabel_3_2_1_1_1);
@@ -371,6 +445,14 @@ public class DashboardView extends JFrame {
 				dv.setVisible(true);
 				dv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pDelivery.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pDelivery.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pDelivery.setLayout(null);
 		pDelivery.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -394,6 +476,14 @@ public class DashboardView extends JFrame {
 				pdv.setVisible(true);
 				pdv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pPurchaseView.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pPurchaseView.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pPurchaseView.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pPurchaseView.setBounds(158, 380, 205, 33);
@@ -413,6 +503,14 @@ public class DashboardView extends JFrame {
 				sdv.setVisible(true);
 				sdv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pSaleView.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pSaleView.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pSaleView.setLayout(null);
 		pSaleView.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -432,6 +530,14 @@ public class DashboardView extends JFrame {
 				odv.setVisible(true);
 				odv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pOrderView.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pOrderView.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pOrderView.setLayout(null);
 		pOrderView.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -451,6 +557,14 @@ public class DashboardView extends JFrame {
 				dvd.setVisible(true);
 				dvd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
+			public void mouseEntered(MouseEvent e) {
+				pDeliveryView.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pDeliveryView.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
 		});
 		pDeliveryView.setLayout(null);
 		pDeliveryView.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -543,4 +657,5 @@ public class DashboardView extends JFrame {
 		Image img = imgIco.getImage().getScaledInstance(lblDb.getWidth(), lblDb.getHeight(), Image.SCALE_SMOOTH);
 		lblDb.setIcon(new ImageIcon(img));
 	};
+	
 }

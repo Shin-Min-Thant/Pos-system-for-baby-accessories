@@ -225,6 +225,8 @@ public class DeliverView extends JFrame {
 								} catch (FileNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
+
 								}
 							
 								
@@ -291,6 +293,8 @@ public class DeliverView extends JFrame {
 								} catch (FileNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
+
 								}
 								
 								
@@ -328,9 +332,6 @@ public class DeliverView extends JFrame {
 								showList();
 								clear();
 								
-							}else {
-								System.out.println(rs);
-								JOptionPane.showMessageDialog(null,"Delete fails");
 							}
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
@@ -392,7 +393,7 @@ public class DeliverView extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
 		
-		Border b = BorderFactory.createLineBorder(Color.black);
+		Border b = BorderFactory.createLineBorder(Color.white);
 		lblDeliverImg = new JLabel("");
 		lblDeliverImg.setBounds(763, 114, 111, 110);
 		lblDeliverImg.setBorder(b);
@@ -601,7 +602,7 @@ public class DeliverView extends JFrame {
 	 		txtPhone.setText("");
 	 		txtEmail.setText("");
 	 		txtCapacity.setText("");
-	 		lblPhoto.setIcon(null);
+	 		lblDeliverImg.setIcon(null);
 	 		txtName.requestFocus(true);
 	    }
 	public void showList() {

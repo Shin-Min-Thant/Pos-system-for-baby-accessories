@@ -105,7 +105,7 @@ public class ItemView extends JFrame {
 	public ItemView() {
 		setTitle("ItemView");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 725, 686);
+		setBounds(100, 100, 778, 686);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -117,7 +117,7 @@ public class ItemView extends JFrame {
 		panel.setBackground(new Color(128, 128, 192));
 		panel.setForeground(new Color(128, 128, 128));
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(0, 0, 709, 287);
+		panel.setBounds(24, 0, 717, 287);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -262,6 +262,8 @@ public class ItemView extends JFrame {
 						} catch (FileNotFoundException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
+
 						}
 						
 					}
@@ -335,6 +337,7 @@ public class ItemView extends JFrame {
 						} catch (FileNotFoundException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
 						}
 						
 					}
@@ -369,7 +372,7 @@ public class ItemView extends JFrame {
 								showList();
 								clear();
 							}else {
-								JOptionPane.showMessageDialog(null,"Delete fails");
+								JOptionPane.showMessageDialog(null,"Cannot delete the item because it is referenced by another record.");
 							}
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
@@ -391,6 +394,12 @@ public class ItemView extends JFrame {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
+				try {
+					AutoID();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnClear.setFont(new Font("Pyidaungsu", Font.PLAIN, 15));
@@ -452,7 +461,7 @@ public class ItemView extends JFrame {
 		panel.add(btnUpload);
 		
 		lblPhoto = new JLabel("");
-		lblPhoto.setBounds(0, 0, 708, 636);
+		lblPhoto.setBounds(0, 0, 717, 636);
 		panel.add(lblPhoto);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("ItemName:");
@@ -484,12 +493,12 @@ public class ItemView extends JFrame {
 		
 		panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(10, 348, 699, 295);
+		panel_1.setBounds(10, 348, 746, 295);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(8, 14, 681, 267);
+		scrollPane_1.setBounds(8, 14, 730, 230);
 		panel_1.add(scrollPane_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -616,7 +625,7 @@ public class ItemView extends JFrame {
 		dtm.addColumn("qty");
 		dtm.addColumn("remark");
 		tblItem.setModel(dtm);
-		 setColumnWidth(0,80,100);
+		 setColumnWidth(0,80,150);
 	     setColumnWidth(1,60,100);
 	     setColumnWidth(2,60,100);
 	     setColumnWidth(3,60,100);

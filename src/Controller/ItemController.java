@@ -93,7 +93,6 @@ public class ItemController {
 		try {
 			PreparedStatement ps = (PreparedStatement)con.prepareStatement(sql);
 			ps.setString(1, dain.getItem_id());
-			System.out.println(dain.getItem_id());
 			result = ps.executeUpdate();
 		} catch (MySQLIntegrityConstraintViolationException e) {
 			// TODO Auto-generated catch block

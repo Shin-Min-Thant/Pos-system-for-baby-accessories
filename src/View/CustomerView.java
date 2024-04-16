@@ -243,6 +243,8 @@ public class CustomerView extends JFrame {
 								} catch (FileNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
+
 								}
 								
 								
@@ -324,6 +326,8 @@ public class CustomerView extends JFrame {
 								} catch (FileNotFoundException | ClassNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
+
 								}
 								
 								
@@ -362,11 +366,8 @@ public class CustomerView extends JFrame {
 								}
 							    showList();
 							    clear();
-							} else {
-								System.out.println(rs);
-								JOptionPane.showMessageDialog(null, "Delete fails");
-							    
-							}
+							}   
+							
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -386,7 +387,14 @@ public class CustomerView extends JFrame {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
-				lblCustomerID.requestFocus(true);			}
+				lblCustomerID.requestFocus(true);
+				try {
+					AutoID();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				}
 		});
 		btnClear.setFont(new Font("Pyidaungsu", Font.PLAIN, 15));
 		btnClear.setBounds(497, 171, 89, 32);

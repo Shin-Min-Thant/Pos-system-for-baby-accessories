@@ -82,17 +82,17 @@ public class SupplierController {
 		
 	}
 	
-	public int delete(SupplierModel dain,String path2) throws SQLException{
+	public int delete(SupplierModel dain,String path2) throws MySQLIntegrityConstraintViolationException{
 		int result =0;
 		String sql = "delete from pos_baby.supplier where supplier_id=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, dain.getSupplier_id());
 			result = ps.executeUpdate();
-		} catch (MySQLIntegrityConstraintViolationException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-	        JOptionPane.showMessageDialog(null, "Cannot delete the supplier because it is referenced by another record.", "Error", JOptionPane.ERROR_MESSAGE);	
+	        JOptionPane.showMessageDialog(null, "Cannot delete the customer because it is referenced by another record.", "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 		return result;
 		

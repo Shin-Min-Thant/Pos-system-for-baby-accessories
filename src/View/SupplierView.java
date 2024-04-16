@@ -227,6 +227,8 @@ public class SupplierView extends JFrame {
 								} catch (FileNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
+
 								}
 								
 								
@@ -309,6 +311,8 @@ public class SupplierView extends JFrame {
 								} catch (FileNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Please Upload a photo","Upload", JOptionPane.INFORMATION_MESSAGE);
+
 								}
 								
 								
@@ -343,11 +347,8 @@ public class SupplierView extends JFrame {
 								AutoID();
 								showList();
 								clear();
-								
-							}else {
-								System.out.println(rs);
-								JOptionPane.showMessageDialog(null,"Delete fails");
 							}
+								
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
