@@ -339,14 +339,7 @@ public class DeliveryView extends JFrame {
 					cboOrderID.requestFocus();
 					clearItem();
 					cboOrderID.setSelectedIndex(0);
-				} else if (!lblTotal_Qty.getText().isEmpty() && !lblCapacity.getText().isEmpty()
-						&& Integer.parseInt(lblTotal_Qty.getText()) > 0 && Integer.parseInt(lblCapacity.getText()) > 0
-						&& Integer.parseInt(lblTotal_Qty.getText()) > Integer.parseInt(lblCapacity.getText())) {
-					JOptionPane.showMessageDialog(null, "Your qty is more than capacity qty");
-					cboOrderID.requestFocus();
-					clearItem();
-					cboOrderID.setSelectedIndex(0);
-
+				
 				} else {
 					itemAddMethod();
 					lblTotalAmount.setText(Checking.Sumamount(vamount, 1) + "Kyats");
@@ -418,7 +411,16 @@ public class DeliveryView extends JFrame {
 				} else if (vid.size() == 0) {
 					JOptionPane.showMessageDialog(null, "There is no item for Order!");
 					cboDeliverID.requestFocus();
-				} else {
+				}else if (!lblTotal_Qty.getText().isEmpty() && !lblCapacity.getText().isEmpty()
+						&& Integer.parseInt(lblTotal_Qty.getText()) > 0 && Integer.parseInt(lblCapacity.getText()) > 0
+						&& Integer.parseInt(lblTotal_Qty.getText()) > Integer.parseInt(lblCapacity.getText())) {
+					JOptionPane.showMessageDialog(null, "Your qty is more than capacity qty");
+					cboOrderID.requestFocus();
+					clearItem();
+					cboOrderID.setSelectedIndex(0);
+					clearAll();
+
+				}else {
 					if (JOptionPane.showConfirmDialog(null, "Are you sure to Save?", "Confirm",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 						int save = 0;

@@ -110,6 +110,11 @@ public class LoginView extends JFrame {
 		txtName.setColumns(10);
 		
 		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnExit.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 		btnExit.setBounds(36, 262, 83, 25);
 		panel.add(btnExit);
