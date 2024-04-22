@@ -80,6 +80,7 @@ public class DeliveryView extends JFrame {
 	Vector<String> vid = new Vector<String>();
 	Vector<String> vamount = new Vector<String>();
 	Vector vqty = new Vector();
+	String strdataitem[] = new String[9];
 	
 	int r = 0;
 	String OrderID = null;
@@ -298,7 +299,7 @@ public class DeliveryView extends JFrame {
 					OrderDetailModel cm = new OrderDetailModel();
 					OrderDetailController cc = new OrderDetailController();
 					ArrayList<OrderDetailModel> list = new ArrayList<OrderDetailModel>();
-					cm.setUnique(cboOrderID.getSelectedItem().toString());
+					cm.setUnique(Integer.parseInt((String)cboOrderID.getSelectedItem()));
 					try {
 						list = (ArrayList<OrderDetailModel>) cc.searhOrderDetail(cm);
 						for (OrderDetailModel c : list) {
@@ -329,18 +330,27 @@ public class DeliveryView extends JFrame {
 
 		btnAdd = new JButton("Delivery");
 		btnAdd.addActionListener(new ActionListener() {
+//			String qty = lblQty.getText().trim();
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(cboOrderID.getSelectedIndex());
 				if (cboOrderID.getSelectedIndex() == 0) {
 					JOptionPane.showMessageDialog(null, "You must choose Order Item ID!");
 					cboOrderID.requestFocus();
-				} else if (Checking.IsContain(cboOrderID.getSelectedItem().toString(), vid)) {
+				} else if (Checking.IsContain(strdataitem[1], vid)) {
 					JOptionPane.showMessageDialog(null, "The order you selected is already existed!");
 					cboOrderID.requestFocus();
 					clearItem();
 					cboOrderID.setSelectedIndex(0);
 				
-				} else {
+				}else if (Integer.parseInt(lblQty.getText().trim()) <= 0) {
+					JOptionPane.showMessageDialog(null, "Order Process is completed");
+					cboOrderID.requestFocus();
+					clearItem();
+					cboOrderID.setSelectedIndex(0);
+//					clearAll();
+
+				}
+				else {
 					itemAddMethod();
 					lblTotalAmount.setText(Checking.Sumamount(vamount, 1) + "Kyats");
 					lblTotal_Qty.setText(Checking.Sumamount(vqty, 1));
@@ -366,6 +376,7 @@ public class DeliveryView extends JFrame {
 					lblTotal_Qty.setText(Checking.Sumamount(vqty, 1));
 					btnDelete.setEnabled(false);
 					btnAdd.setEnabled(true);
+					btnSave.setEnabled(true);
 					cboOrderID.setEnabled(true);
 				}
 			}
@@ -411,6 +422,7 @@ public class DeliveryView extends JFrame {
 				} else if (vid.size() == 0) {
 					JOptionPane.showMessageDialog(null, "There is no item for Order!");
 					cboDeliverID.requestFocus();
+
 				}else if (!lblTotal_Qty.getText().isEmpty() && !lblCapacity.getText().isEmpty()
 						&& Integer.parseInt(lblTotal_Qty.getText()) > 0 && Integer.parseInt(lblCapacity.getText()) > 0
 						&& Integer.parseInt(lblTotal_Qty.getText()) > Integer.parseInt(lblCapacity.getText())) {
@@ -420,7 +432,9 @@ public class DeliveryView extends JFrame {
 					cboOrderID.setSelectedIndex(0);
 					clearAll();
 
-				}else {
+				}
+			
+				else {
 					if (JOptionPane.showConfirmDialog(null, "Are you sure to Save?", "Confirm",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 						int save = 0;
@@ -440,6 +454,30 @@ public class DeliveryView extends JFrame {
 								odm.setDelivery_price(Integer.parseInt((String) tblDelivery.getValueAt(i, 3)));
 								odm.setDelivery_qty(Integer.parseInt((String) tblDelivery.getValueAt(i, 4)));
 								save = odc.insert(odm);
+								
+								OrderDetailController oc = new OrderDetailController();
+								OrderDetailModel om = new OrderDetailModel();
+								
+								om.setUnique(Integer.parseInt((String)tblDelivery.getValueAt(i, 5)));
+								try {
+									String data[] = MySqlQueries.getItemData2(om);
+									String nowqty = data[3];
+									int orderqty = Integer.parseInt(nowqty)-Integer.parseInt(nowqty);
+									om.setOrder_qty(orderqty);
+									int saQty = om.getOrder_qty();
+									if(saQty==0) {
+										String comStatus = "Deliverd";
+										System.out.println(comStatus);
+										om.setStatus(comStatus);
+									}else {
+										om.getStatus();
+									}
+									int save2 = oc.update2(om);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
 							}
 						}
 						if (save == 1) {
@@ -576,6 +614,7 @@ public class DeliveryView extends JFrame {
 		dtm.addColumn("Order_Item Name");
 		dtm.addColumn("Price");
 		dtm.addColumn("Qty");
+		dtm.addColumn("unique");
 		tblDelivery.setModel(dtm);
 		setColumnWidth(0, 60);
 		setColumnWidth(1, 60);
@@ -583,16 +622,18 @@ public class DeliveryView extends JFrame {
 		setColumnWidth(3, 50);
 		setColumnWidth(4, 60);
 		setColumnWidth(4, 80);
+		setColumnWidth(4, 80);
 	}
 	
 	public void itemAddMethod() {
-		String strdataitem[] = new String[7];
+		
 		strdataitem[0] = String.valueOf(vid.size()+1);
 		strdataitem[1] = lblOrderID.getText();
 		vid.addElement(strdataitem[1]);
 		strdataitem[2] = lbItemName.getText();
 		strdataitem[3] = lblPrice.getText();
 		strdataitem[4] = lblQty.getText();
+		strdataitem[5] =(String)cboOrderID.getSelectedItem();
 		vamount.addElement(strdataitem[3]);
 		vqty.addElement(strdataitem[4]);
 		System.out.println(vqty);
@@ -630,7 +671,7 @@ public class DeliveryView extends JFrame {
 		lblAddress.setText("");
 		lblEmail.setText("");
 		lblPhone.setText("");
-
+        lblCapacity.setText("");
 		lbItemName.setText("");
 		lblPrice.setText("");
 		lblTotal_Qty.setText("");

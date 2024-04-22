@@ -154,17 +154,17 @@ public class OrderDetailView extends JFrame {
 	     dtm.addColumn("Item Name");
 	     dtm.addColumn("Order_price"); 
 	     dtm.addColumn("Order_qty");
-	     
+	     dtm.addColumn("Status");
 	     tblOrder.setModel(dtm);
 	     setColumnWidth(0,60);
 	     setColumnWidth(1,60);
 	     setColumnWidth(2,60);
 	     setColumnWidth(3,60);
-	    
+	     setColumnWidth(3,60);
 	     
     }
     public void showList(){
-    	String data[] = new String[4];
+    	String data[] = new String[5];
     	OrderDetailController pdc = new OrderDetailController();
     	try {
 			List<OrderDetailModel> list = pdc.showAll();
@@ -174,6 +174,7 @@ public class OrderDetailView extends JFrame {
 				data[1] = sm.getItem_name();
 				data[2] = sm.getOrder_price()+"";
 				data[3] = sm.getOrder_qty()+"";
+				data[4] = sm.getStatus();
 				dtm.addRow(data);
 			}
 		} catch (SQLException e) {
@@ -195,6 +196,7 @@ public class OrderDetailView extends JFrame {
 				data[1] = sm.getItem_name();
 				data[2] = sm.getOrder_price()+"";
 				data[3] = sm.getOrder_qty()+"";
+				data[4] = sm.getStatus();
 				dtm.addRow(data);
 			}
 		} catch (SQLException e) {

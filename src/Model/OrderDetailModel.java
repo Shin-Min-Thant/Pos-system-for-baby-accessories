@@ -7,11 +7,18 @@ public class OrderDetailModel {
 	private int order_qty;
 	private String item_name;
 	private String customer_name;
-	private String unique;
-	public String getUnique() {
+	private int unique;
+	private String status;
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getUnique() {
 		return unique;
 	}
-	public void setUnique(String unique) {
+	public void setUnique(int unique) {
 		this.unique = unique;
 	}
 	public String getCustomer_name() {

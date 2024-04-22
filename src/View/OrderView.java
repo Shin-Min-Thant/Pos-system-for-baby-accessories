@@ -80,16 +80,17 @@ public class OrderView extends JFrame {
 	private JLabel lblTotalAmount;
 	DefaultTableModel dtm = new DefaultTableModel();
 	private JLabel lblOrderID;
-	 String strdataitem[] = new String[12];
+	 String strdataitem[] = new String[13];
 	    String strquery[] = new String[7];
 	    Vector vid = new Vector();
 	    Vector vamount = new Vector();
 	    private JLabel lblPhoto;
 	    private JLabel Number;
 	    private JLabel lblNumber;
-	    private JLabel lblPhoto1;
 	    private JLabel lblPhoto2;
 	    private JScrollPane scrollPane_1;
+	    private JLabel lblStatus;
+	    private JLabel lblImg;
 	   
 
 	/**
@@ -292,7 +293,7 @@ public class OrderView extends JFrame {
 					ItemController ic = new ItemController();
 					im.setItem_id(cboItemID.getSelectedItem().toString());
 					try {
-						String randomNumber = generateRandomNumber(1000, 9999);
+						int randomNumber = generateRandomNumber(1000, 9999);
 						strquery = MySqlQueries.getItemData1(im);
 						strdataitem[1] = strquery[0];  //id
 						strdataitem[2] = strquery[1];  //name
@@ -305,7 +306,8 @@ public class OrderView extends JFrame {
 						strdataitem[7]=MySqlQueries.getBrandName(strquery[3]); //branid
 						strdataitem[8]=MySqlQueries.getTypeName(strquery[4]);  //tyepid
 						lblItemtype.setText(strdataitem[8]);
-				        lblNumber.setText(randomNumber);
+						lblStatus.setText("Order");
+				        lblNumber.setText(randomNumber+"");
 					}catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -486,7 +488,8 @@ public class OrderView extends JFrame {
 								odm.setItem_id((String)tblOrder.getValueAt(i, 1));
 								odm.setOrder_price(Integer.parseInt((String)tblOrder.getValueAt(i, 3)));
 								odm.setOrder_qty(Integer.parseInt((String)tblOrder.getValueAt(i, 4)));
-								odm.setUnique((String)tblOrder.getValueAt(i, 5));
+								odm.setUnique(Integer.parseInt((String)tblOrder.getValueAt(i, 6)));
+								odm.setStatus((String)tblOrder.getValueAt(i, 7));
 								save = odc.insert(odm);
 								
 								ItemModel im = new ItemModel();
@@ -547,7 +550,8 @@ public class OrderView extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane_1.setViewportView(scrollPane);
-		scrollPane.addMouseListener(new MouseAdapter() {
+		tblOrder = new JTable();
+		tblOrder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int r = tblOrder.getSelectedRow();
@@ -555,20 +559,21 @@ public class OrderView extends JFrame {
 				String[] parts = collection.split("/");
 				String itemName = parts[0];
 				String itemType = parts[1];
-				cboItemID.setSelectedItem(tblOrder.getValueAt(r, 1));
+				cboItemID.setSelectedItem(tblOrder.getValueAt(r, 1).toString());
 				lbItemName.setText(itemName);
 				lblItemtype.setText(itemType);
 				lblPrice.setText(tblOrder.getValueAt(r, 3).toString());
 				txtQty.setText(tblOrder.getValueAt(r, 4).toString());
-				lblNumber.setText(tblOrder.getValueAt(r, 5).toString());
+				lblNumber.setText(tblOrder.getValueAt(r, 6).toString());
+				lblStatus.setText(tblOrder.getValueAt(r, 7).toString());
 				cboItemID.setEnabled(false);
 				btnAdd.setEnabled(false);
 				btnUpdate.setEnabled(true);
 				btnDelete.setEnabled(true);
 			}
-		});
+			
 		
-		tblOrder = new JTable();
+		});
 		scrollPane.setViewportView(tblOrder);
 		createTable();
 		PurAutoID();
@@ -600,9 +605,16 @@ public class OrderView extends JFrame {
 		lblNumber.setBorder(b);
 		panel_1.add(lblNumber);
 		
-		lblPhoto1 = new JLabel("");
-		lblPhoto1.setBounds(0, 0, 627, 278);
-		panel_1.add(lblPhoto1);
+		lblStatus = new JLabel("");
+		lblStatus.setForeground(new Color(255, 255, 255));
+		lblStatus.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
+		lblStatus.setBounds(483, 32, 106, 28);
+		lblStatus.setBorder(b);
+		panel_1.add(lblStatus);
+		
+		lblImg = new JLabel("New label");
+		lblImg.setBounds(0, 0, 627, 278);
+		panel_1.add(lblImg);
 		
 		lblTotalAmount = new JLabel("0 Kyat");
 		lblTotalAmount.setForeground(new Color(255, 255, 255));
@@ -611,7 +623,7 @@ public class OrderView extends JFrame {
 		contentPane_1.add(lblTotalAmount);
 		
 		lblPhoto = new JLabel("");
-		lblPhoto.setBounds(-19, 0, 676, 725);
+		lblPhoto.setBounds(0, 14, 657, 711);
 		contentPane_1.add(lblPhoto);
 		displayImg();
 		displayImg1();
@@ -632,6 +644,7 @@ public class OrderView extends JFrame {
 		dtm.addColumn("Qty");
 		dtm.addColumn("Amount");
 		dtm.addColumn("Unique Nuber");
+		dtm.addColumn("Status");
 		tblOrder.setModel(dtm);
 		setColumnWidth(0,60);
 		setColumnWidth(1,60);
@@ -639,6 +652,7 @@ public class OrderView extends JFrame {
 		setColumnWidth(3,50);
 		setColumnWidth(4,60);
 		setColumnWidth(4,80);
+		setColumnWidth(5,80);
 		setColumnWidth(5,80);
 	}
 	
@@ -652,6 +666,8 @@ public class OrderView extends JFrame {
 		lblPrice.setText("");
 		txtQty.setText("");
 		lblInstockQuantity.setText("");
+		lblNumber.setText("");
+		lblStatus.setText("");
 		cboItemID.setSelectedIndex(0);
 	}
 	
@@ -661,6 +677,8 @@ public class OrderView extends JFrame {
 		lblAddress.setText("");
 		lblEmail.setText("");
 		lblPhone.setText("");
+		lblNumber.setText("");
+		lblStatus.setText("");
 		
 		lbItemName.setText("");
 		lblItemtype.setText("");
@@ -693,6 +711,8 @@ public class OrderView extends JFrame {
 		strdataitem[5] = String.valueOf(amount);
 		vamount.addElement(strdataitem[5]);
 		strdataitem[6] = lblNumber.getText();
+		strdataitem[7] = lblStatus.getText();
+		lblStatus.setText("Order");
 		dtm.addRow(strdataitem);
 		tblOrder.setModel(dtm);
 		cboItemID.requestFocus();
@@ -718,16 +738,16 @@ public class OrderView extends JFrame {
 	}
 	public void displayImg1() {
 		ImageIcon imgIco = new ImageIcon(getClass().getResource("/My_Img/sale2.jpeg"));
-		Image img = imgIco.getImage().getScaledInstance(lblPhoto1.getWidth(), lblPhoto1.getHeight(), Image.SCALE_SMOOTH);
-		lblPhoto1.setIcon(new ImageIcon(img));
+		Image img = imgIco.getImage().getScaledInstance(lblImg.getWidth(), lblImg.getHeight(), Image.SCALE_SMOOTH);
+		lblImg.setIcon(new ImageIcon(img));
 	}
 	public void displayImg2() {
 		ImageIcon imgIco = new ImageIcon(getClass().getResource("/My_Img/sale2.jpeg"));
 		Image img = imgIco.getImage().getScaledInstance(lblPhoto2.getWidth(), lblPhoto2.getHeight(), Image.SCALE_SMOOTH);
 		lblPhoto2.setIcon(new ImageIcon(img));
 	}
-	 public static String generateRandomNumber(int minValue, int maxValue) {
+	 public static int generateRandomNumber(int minValue, int maxValue) {
 	        int random= (int) (Math.random() * (maxValue - minValue + 1)) + minValue;
-	        return "#" + random;
+	        return random;
 	 }
 }

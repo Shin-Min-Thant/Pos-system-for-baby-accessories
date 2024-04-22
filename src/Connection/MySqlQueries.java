@@ -10,6 +10,8 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 import Model.ItemModel;
+import Model.OrderDetailModel;
+import Model.OrderModel;
 
 public class MySqlQueries {
 	public static Connection con = null;
@@ -123,6 +125,23 @@ public class MySqlQueries {
 		return str;
 	}
 	
+	public static String[] getItemData2(OrderDetailModel dain)throws SQLException{
+		String str[] = new String[6];
+		String sql = "select * from pos_baby.order_detail where `unique` =?";
+		PreparedStatement ps = (PreparedStatement)con.prepareStatement(sql);
+        ps.setInt(1, dain.getUnique());
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+        	str[0] = rs.getString("order_id");
+        	str[1] = rs.getString("item_id"); 
+        	str[2] = rs.getString("order_price"); 
+        	str[3] = rs.getString("order_qty");
+        	str[4] = rs.getString("unique");
+        	str[5] = rs.getString("status");
+        }
+        System.out.println(str[3]);
+		return str;
+	}
 
 	
 

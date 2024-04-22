@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import Connection.ClsDBConnection;
 import Model.ItemModel;
@@ -32,14 +33,15 @@ public class OrderDetailController {
 	
 	public int insert(OrderDetailModel dain) {
 		int result =0;
-		String sql = "INSERT INTO pos_baby.order_detail (order_id, item_id, order_price, order_qty, `unique`) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO pos_baby.order_detail (order_id, item_id, order_price, order_qty, `unique`,status) VALUES (?, ?, ?, ?, ?,?)";
 		try {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, dain.getOrder_id());
 			ps.setString(2, dain.getItem_id());
 			ps.setInt(3, dain.getOrder_price());
 			ps.setInt(4, dain.getOrder_qty());
-			ps.setString(5, dain.getUnique());
+			ps.setInt(5, dain.getUnique());
+			ps.setString(6, dain.getStatus());
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,6 +49,38 @@ public class OrderDetailController {
 		}
 		return result;
 		
+	}
+	public int update2(OrderDetailModel dain) {
+		int result =0;
+		String sql = "update pos_baby.order_detail set order_qty=?,status=? where `unique` =?";
+		try {
+			PreparedStatement ps = (PreparedStatement)con.prepareStatement(sql);
+			ps.setInt(1, dain.getOrder_qty());
+			ps.setString(2, dain.getStatus());
+			ps.setInt(3, dain.getUnique());
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	public int delete(OrderDetailModel dain) throws SQLException{
+		int result =0;
+		String sql = "delete from pos_baby.order_detail where `unique` =?";
+		try {
+			PreparedStatement ps = (PreparedStatement)con.prepareStatement(sql);
+			ps.setInt(1, dain.getUnique());
+			result = ps.executeUpdate();
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Cannot delete the order because it is referenced by another record.", "Error", JOptionPane.ERROR_MESSAGE);	
+		}
+		return result;
+			
 	}
 	
 	public List<OrderDetailModel> showAll() throws SQLException{
@@ -61,7 +95,8 @@ public class OrderDetailController {
         	odm.setItem_id(rs.getString("item_id"));
         	odm.setOrder_price(rs.getInt("order_price"));
         	odm.setOrder_qty(rs.getInt("order_qty"));
-        	odm.setUnique(rs.getString("unique"));
+        	odm.setUnique(rs.getInt("unique"));
+        	odm.setStatus(rs.getString("status"));
         	ItemModel im = new ItemModel();
         	ItemController ic = new ItemController();
         	im.setItem_id(odm.getItem_id());
@@ -75,7 +110,7 @@ public class OrderDetailController {
 		List<OrderDetailModel> list = new ArrayList<OrderDetailModel>();
 		String sql = "SELECT * FROM pos_baby.order_detail WHERE `unique` = ? ORDER BY order_id DESC";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
-		ps.setString(1, dain.getUnique());
+		ps.setInt(1, dain.getUnique());
         ResultSet rs = ps.executeQuery();
         while(rs.next()) {
         	OrderDetailController odc = new OrderDetailController();
@@ -84,7 +119,8 @@ public class OrderDetailController {
         	odm.setItem_id(rs.getString("item_id"));
         	odm.setOrder_price(rs.getInt("order_price"));
         	odm.setOrder_qty(rs.getInt("order_qty"));
-        	odm.setUnique(rs.getString("unique"));
+        	odm.setUnique(rs.getInt("unique"));
+        	odm.setStatus(rs.getString("status"));
         	ItemModel im = new ItemModel();
         	ItemController ic = new ItemController();
         	im.setItem_id(odm.getItem_id());
@@ -107,7 +143,8 @@ public class OrderDetailController {
         	odm.setItem_id(rs.getString("item_id"));
         	odm.setOrder_price(rs.getInt("order_price"));
         	odm.setOrder_qty(rs.getInt("order_qty"));
-        	odm.setUnique(rs.getString("unique"));
+        	odm.setUnique(rs.getInt("unique"));
+        	odm.setStatus(rs.getString("status"));
         	ItemModel im = new ItemModel();
         	ItemController ic = new ItemController();
         	im.setItem_id(odm.getItem_id());
