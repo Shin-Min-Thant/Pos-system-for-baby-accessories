@@ -28,6 +28,7 @@ import Connection.MySqlQueries;
 import Connection.date;
 import Controller.CustomerController;
 import Controller.ItemController;
+import Controller.Loss_ProfitController;
 import Controller.OrderController;
 import Controller.OrderDetailController;
 import Controller.SaleController;
@@ -38,6 +39,7 @@ import Model.OrderDetailModel;
 import Model.OrderModel;
 import Model.SaleDetailModel;
 import Model.SaleModel;
+import Model.loss_profitModel;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -54,6 +56,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 
 public class OrderView extends JFrame {
 
@@ -502,6 +505,17 @@ public class OrderView extends JFrame {
 									im.setQty(totalqty);
 									int save2 = ic.update2(im);
 								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								Loss_ProfitController pfc = new Loss_ProfitController();
+								loss_profitModel plm = new loss_profitModel();
+								plm.setTotal_order(lblTotalAmount.getText());
+								
+								try {
+									save = pfc.insertOrder(plm);
+								} catch (FileNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}

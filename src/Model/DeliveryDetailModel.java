@@ -5,7 +5,14 @@ public class DeliveryDetailModel {
 	private String order_id;
 	private int delivery_price;
 	private int delivery_qty;
-	 private String item_name;
+	private String item_name;
+	private String delive_fees;
+	public String getDelive_fees() {
+		return delive_fees;
+	}
+	public void setDelive_fees(String delive_fees) {
+		this.delive_fees = delive_fees;
+	}
 	public String getItem_name() {
 		return item_name;
 	}

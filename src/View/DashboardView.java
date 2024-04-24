@@ -51,6 +51,8 @@ public class DashboardView extends JFrame {
 	private JPanel pOrderView;
 	private JPanel pDeliveryView;
 	private JPanel pLogout;
+	private JPanel pProfitLoss;
+	private JLabel lblNewLabel_2_3;
 	private JLabel lblDb;
 
 	/**
@@ -487,7 +489,7 @@ public class DashboardView extends JFrame {
 	            }
 		});
 		pPurchaseView.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pPurchaseView.setBounds(158, 380, 205, 33);
+		pPurchaseView.setBounds(56, 380, 205, 33);
 		panel_1.add(pPurchaseView);
 		pPurchaseView.setLayout(null);
 		
@@ -515,7 +517,7 @@ public class DashboardView extends JFrame {
 		});
 		pSaleView.setLayout(null);
 		pSaleView.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pSaleView.setBounds(521, 380, 205, 33);
+		pSaleView.setBounds(322, 380, 205, 33);
 		panel_1.add(pSaleView);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Sale Detail View");
@@ -542,7 +544,7 @@ public class DashboardView extends JFrame {
 		});
 		pOrderView.setLayout(null);
 		pOrderView.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pOrderView.setBounds(158, 442, 205, 33);
+		pOrderView.setBounds(56, 427, 205, 33);
 		panel_1.add(pOrderView);
 		
 		JLabel lblNewLabel_2_2 = new JLabel("Order Detail View");
@@ -569,7 +571,7 @@ public class DashboardView extends JFrame {
 		});
 		pDeliveryView.setLayout(null);
 		pDeliveryView.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pDeliveryView.setBounds(521, 442, 205, 33);
+		pDeliveryView.setBounds(322, 427, 205, 33);
 		panel_1.add(pDeliveryView);
 		
 		JLabel lblNewLabel_2_2_1 = new JLabel("Delivery Detail View");
@@ -603,6 +605,33 @@ public class DashboardView extends JFrame {
 		lblNewLabel_4.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
 		lblNewLabel_4.setBounds(16, 0, 81, 31);
 		pLogout.add(lblNewLabel_4);
+		
+		pProfitLoss = new JPanel();
+		pProfitLoss.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Profit_LossView plv = new Profit_LossView();
+				plv.setVisible(true);
+				plv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+			public void mouseEntered(MouseEvent e) {
+				pProfitLoss.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pProfitLoss.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
+		});
+		pProfitLoss.setLayout(null);
+		pProfitLoss.setBorder(new LineBorder(new Color(0, 0, 0)));
+		pProfitLoss.setBounds(566, 402, 205, 33);
+		panel_1.add(pProfitLoss);
+		
+		lblNewLabel_2_3 = new JLabel("Profit and Loss");
+		lblNewLabel_2_3.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+		lblNewLabel_2_3.setBounds(52, 0, 120, 31);
+		pProfitLoss.add(lblNewLabel_2_3);
 		
 		lblDb = new JLabel("");
 		lblDb.setBounds(8, 0, 843, 507);

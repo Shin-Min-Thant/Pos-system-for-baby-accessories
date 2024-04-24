@@ -18,6 +18,7 @@ import Connection.Checking;
 import Connection.MySqlQueries;
 import Connection.date;
 import Controller.ItemController;
+import Controller.Loss_ProfitController;
 import Controller.PurchaseController;
 import Controller.PurchaseDetailController;
 import Controller.SupplierController;
@@ -25,6 +26,7 @@ import Model.ItemModel;
 import Model.PurchaseDetailModel;
 import Model.PurchaseModel;
 import Model.SupplierModel;
+import Model.loss_profitModel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -46,6 +48,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 
 public class PurchaseView extends JFrame {
 
@@ -79,6 +82,7 @@ public class PurchaseView extends JFrame {
 	private JLabel lblPhoto1;
 	private JLabel lblPhoto2;
 	private JScrollPane scrollPane_1;
+	
 
 	/**
 	 * Launch the application.
@@ -472,6 +476,19 @@ public class PurchaseView extends JFrame {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
+								
+								Loss_ProfitController pfc = new Loss_ProfitController();
+								loss_profitModel plm = new loss_profitModel();
+								plm.setTotal_purchase(lblTotalAmount.getText());
+								
+								try {
+									save = pfc.insertPurchase(plm);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								
 							}
 						}
 						if(save==1) {

@@ -34,7 +34,7 @@ public class DeliveryDetailController {
 	
 	public int insert(DeliveryDetailModel dain) {
 		int result =0;
-		String sql = "insert into pos_baby.delivery_detail (delivery_id,order_id,delivery_price,delivery_qty) values(?,?,?,?)";
+		String sql = "insert into pos_baby.delivery_detail (delivery_id,order_id,delivery_price,delivery_qty,delive_fees) values(?,?,?,?,?)";
 		try {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, dain.getDelivery_id());
@@ -42,6 +42,7 @@ public class DeliveryDetailController {
 			ps.setString(2, dain.getOrder_id());
 			ps.setInt(3, dain.getDelivery_price());
 			ps.setInt(4, dain.getDelivery_qty());
+			ps.setString(5, dain.getDelive_fees());
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -63,6 +64,7 @@ public class DeliveryDetailController {
         	ddm.setOrder_id(rs.getString("order_id"));
         	ddm.setDelivery_price(rs.getInt("delivery_price"));
         	ddm.setDelivery_qty(rs.getInt("delivery_qty"));
+        	ddm.setDelive_fees(rs.getString("delive_fees"));
         	
         	OrderDetailController odc = new OrderDetailController();
         	OrderDetailModel odm = new OrderDetailModel();
@@ -92,6 +94,7 @@ public class DeliveryDetailController {
         	ddm.setOrder_id(rs.getString("order_id"));
         	ddm.setDelivery_price(rs.getInt("delivery_price"));
         	ddm.setDelivery_qty(rs.getInt("delivery_qty"));
+        	ddm.setDelive_fees(rs.getString("delive_fees"));
         	
         	OrderDetailController odc = new OrderDetailController();
         	OrderDetailModel odm = new OrderDetailModel();

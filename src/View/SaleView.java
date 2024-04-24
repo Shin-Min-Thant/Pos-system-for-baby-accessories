@@ -20,12 +20,14 @@ import Connection.MySqlQueries;
 import Connection.date;
 import Controller.CustomerController;
 import Controller.ItemController;
+import Controller.Loss_ProfitController;
 import Controller.SaleController;
 import Controller.SaleDetailController;
 import Model.CustomerModel;
 import Model.ItemModel;
 import Model.SaleDetailModel;
 import Model.SaleModel;
+import Model.loss_profitModel;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -51,6 +53,7 @@ import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 
 
 public class SaleView extends JFrame {
@@ -486,6 +489,17 @@ public class SaleView extends JFrame {
 									im.setQty(totalqty);
 									int save2 = ic.update2(im);
 								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								Loss_ProfitController pfc = new Loss_ProfitController();
+								loss_profitModel plm = new loss_profitModel();
+								plm.setTotal_sale(lblTotalAmount.getText());
+								
+								try {
+									save = pfc.insertSale(plm);
+								} catch (FileNotFoundException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}

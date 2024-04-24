@@ -29,14 +29,14 @@ public class PurchaseDetailController {
 		}
 	
 	}
-	
+
 	public int insert(PurchaseDetailModel dain) {
 		int result =0;
 		String sql = "insert into pos_baby.purchase_detail (purchase_id,item_id,purchase_price,purchase_qty) values(?,?,?,?)";
+
 		try {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, dain.getPurchase_id());
-			System.out.println(dain.getPurchase_id());
 			ps.setString(2, dain.getItem_id());
 			ps.setInt(3, dain.getPurchase_price());
 			ps.setInt(4, dain.getPurchase_qty());
@@ -47,6 +47,18 @@ public class PurchaseDetailController {
 		}
 		return result;
 		
+	}
+	
+	public String getTotalPrice() throws SQLException {
+		String totalPrice = null;
+		String sql = "SELECT total_price FROM pos_baby.purchase_detail";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()) {
+			totalPrice = rs.getString("total_price");
+		}
+		System.out.println(totalPrice);
+		return totalPrice;
 	}
 	
 	public List<PurchaseDetailModel> showAll() throws SQLException{

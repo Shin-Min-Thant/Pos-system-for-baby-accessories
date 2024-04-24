@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.mysql.jdbc.Connection;
+
 import Controller.PurchaseDetailController;
 import Model.PurchaseDetailModel;
 
@@ -18,6 +20,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -39,8 +42,9 @@ public class PurchaseDetailView extends JFrame {
 	DefaultTableModel dtm = new DefaultTableModel();
 	private JTextField txtShowAll;
 	private JButton btnNewButton;
+	private JTextField txtTotal;
 	private JLabel lblPhoto;
-
+    private PurchaseDetailController pdc;
 	/**
 	 * Launch the application.
 	 */
@@ -61,6 +65,7 @@ public class PurchaseDetailView extends JFrame {
 	 * Create the frame.
 	 */
 	public PurchaseDetailView() {
+		
 		setTitle("Purchase List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 674, 520);
@@ -72,7 +77,7 @@ public class PurchaseDetailView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(43, 56, 574, 402);
+		scrollPane.setBounds(43, 56, 574, 359);
 		contentPane.add(scrollPane);
 		
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -117,6 +122,17 @@ public class PurchaseDetailView extends JFrame {
 		lblPurchaseDetail.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
 		lblPurchaseDetail.setBounds(33, 26, 153, 17);
 		contentPane.add(lblPurchaseDetail);
+		
+		txtTotal = new JTextField();
+		txtTotal.setFont(new Font("Pyidaungsu", Font.PLAIN, 15));
+		txtTotal.setColumns(10);
+		txtTotal.setBounds(502, 429, 115, 23);
+		contentPane.add(txtTotal);
+		
+		JLabel lblTotalprice = new JLabel("TotalPrice:");
+		lblTotalprice.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
+		lblTotalprice.setBounds(407, 434, 80, 17);
+		contentPane.add(lblTotalprice);
 		
 		lblPhoto = new JLabel("");
 		lblPhoto.setBounds(0, 0, 660, 483);
@@ -186,9 +202,10 @@ public class PurchaseDetailView extends JFrame {
 			e.printStackTrace();
 		}
     }
+    
     public void displayImg() {
  		ImageIcon imgIco = new ImageIcon(getClass().getResource("/My_Img/purchase.jpeg"));
  		Image img = imgIco.getImage().getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH);
- 		lblPhoto.setIcon(new ImageIcon(img));
+		lblPhoto.setIcon(new ImageIcon(img));
  	}
 }
