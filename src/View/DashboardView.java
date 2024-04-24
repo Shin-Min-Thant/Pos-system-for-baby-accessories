@@ -50,6 +50,7 @@ public class DashboardView extends JFrame {
 	private JPanel pSaleView;
 	private JPanel pOrderView;
 	private JPanel pDeliveryView;
+	private JPanel pLogout;
 	private JLabel lblDb;
 
 	/**
@@ -576,6 +577,33 @@ public class DashboardView extends JFrame {
 		lblNewLabel_2_2_1.setBounds(34, 0, 149, 31);
 		pDeliveryView.add(lblNewLabel_2_2_1);
 		
+		pLogout = new JPanel();
+		pLogout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				LoginView lv = new LoginView();
+				lv.setVisible(true);
+			}
+			public void mouseEntered(MouseEvent e) {
+				pLogout.setBackground(new Color(255, 218, 185)); // PeachPuff color on mouse enter
+	            }
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	            	pLogout.setBackground(UIManager.getColor("control")); // Restore default background color on mouse exit
+	            }
+		});
+		pLogout.setBorder(new LineBorder(new Color(0, 0, 0)));
+		pLogout.setBounds(746, 460, 97, 33);
+		panel_1.add(pLogout);
+		pLogout.setLayout(null);
+		
+		JLabel lblNewLabel_4 = new JLabel("Logout");
+		lblNewLabel_4.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
+		lblNewLabel_4.setBounds(16, 0, 81, 31);
+		pLogout.add(lblNewLabel_4);
+		
 		lblDb = new JLabel("");
 		lblDb.setBounds(8, 0, 843, 507);
 		panel_1.add(lblDb);
@@ -656,6 +684,5 @@ public class DashboardView extends JFrame {
 		ImageIcon imgIco = new ImageIcon(getClass().getResource("/My_Img/dbbg.jpeg"));
 		Image img = imgIco.getImage().getScaledInstance(lblDb.getWidth(), lblDb.getHeight(), Image.SCALE_SMOOTH);
 		lblDb.setIcon(new ImageIcon(img));
-	};
-	
+	}
 }

@@ -143,7 +143,6 @@ public class OrderDetailController {
         	odm.setItem_id(rs.getString("item_id"));
         	odm.setOrder_price(rs.getInt("order_price"));
         	odm.setOrder_qty(rs.getInt("order_qty"));
-        	odm.setUnique(rs.getInt("unique"));
         	odm.setStatus(rs.getString("status"));
         	ItemModel im = new ItemModel();
         	ItemController ic = new ItemController();

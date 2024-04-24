@@ -184,7 +184,7 @@ public class OrderDetailView extends JFrame {
     }
     
     public void showListOne(){
-    	String data[] = new String[4];
+    	String data[] = new String[5];
     	OrderDetailController sc = new OrderDetailController();
     	OrderDetailModel s = new OrderDetailModel();
     	s.setItem_name(txtShowAll.getText().toString().trim());
