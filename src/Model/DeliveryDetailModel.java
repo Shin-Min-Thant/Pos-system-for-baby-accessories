@@ -7,6 +7,13 @@ public class DeliveryDetailModel {
 	private int delivery_qty;
 	private String item_name;
 	private String delive_fees;
+	private String address;
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getDelive_fees() {
 		return delive_fees;
 	}

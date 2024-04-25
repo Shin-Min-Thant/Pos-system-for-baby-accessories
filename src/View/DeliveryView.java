@@ -311,7 +311,7 @@ public class DeliveryView extends JFrame {
 							lbItemName.setText(String.valueOf(c.getItem_name()));
 							lblOrderAddress.setText(String.valueOf(c.getAddress()));
 							lblQty.setText(String.valueOf(c.getOrder_qty()));
-							lblFees.setText("3000");
+							lblFees.setText("1500");
 						}
 
 					} catch (SQLException e1) {
@@ -352,10 +352,8 @@ public class DeliveryView extends JFrame {
 					cboOrderID.requestFocus();
 					clearItem();
 					cboOrderID.setSelectedIndex(0);
-//					clearAll();
 
-				}
-				else {
+				}else {
 					itemAddMethod();
 					lblTotalAmount.setText(Checking.Sumamount(vamount, 1) + "Kyats");
 					lblTotal_Qty.setText(Checking.Sumamount(vqty, 1));
@@ -453,7 +451,7 @@ public class DeliveryView extends JFrame {
 								DeliveryDetailModel odm = new DeliveryDetailModel();
 								odm.setDelivery_id(lblDeliveryID.getText().toString());
 								odm.setOrder_id((String) tblDelivery.getValueAt(i, 1));
-								odm.setDelivery_price(Integer.parseInt((String) tblDelivery.getValueAt(i, 3)));
+								odm.setAddress(tblDelivery.getValueAt(i, 3).toString());
 								odm.setDelivery_qty(Integer.parseInt((String) tblDelivery.getValueAt(i, 4)));
 								odm.setDelive_fees((String)tblDelivery.getValueAt(i, 6));
 								save = odc.insert(odm);
@@ -638,7 +636,7 @@ public class DeliveryView extends JFrame {
 		dtm.addColumn("No");
 		dtm.addColumn("Order ID");
 		dtm.addColumn("Order_Item Name");
-		dtm.addColumn("Price");
+		dtm.addColumn("Address");
 		dtm.addColumn("Qty");
 		dtm.addColumn("unique");
 		dtm.addColumn("delive fees");
