@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -16,6 +17,7 @@ import Model.loss_profitModel;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.text.DateFormatSymbols;
@@ -41,6 +43,7 @@ public class Profit_LossView extends JFrame {
 	private JLabel lblPhoto1;
 	private JLabel lblDate;
 	private JComboBox cboMonth;
+	private JLabel lblBg;
 	/**
 	 * Launch the application.
 	 */
@@ -71,85 +74,85 @@ public class Profit_LossView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Total Purchase Price:");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setForeground(new Color(0, 0, 0));
 		lblNewLabel.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblNewLabel.setBounds(44, 181, 182, 38);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblTotalDeliveryPrice = new JLabel("Total Delivery Fees Price:");
-		lblTotalDeliveryPrice.setForeground(new Color(255, 255, 255));
+		lblTotalDeliveryPrice.setForeground(new Color(0, 0, 0));
 		lblTotalDeliveryPrice.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblTotalDeliveryPrice.setBounds(44, 233, 192, 38);
 		contentPane.add(lblTotalDeliveryPrice);
 		
 		JLabel lblTotalSlaePrice = new JLabel("Total Sale Price:");
-		lblTotalSlaePrice.setForeground(new Color(255, 255, 255));
+		lblTotalSlaePrice.setForeground(new Color(0, 0, 0));
 		lblTotalSlaePrice.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblTotalSlaePrice.setBounds(44, 364, 138, 38);
 		contentPane.add(lblTotalSlaePrice);
 		
 		JLabel lblTotalOrderPrice = new JLabel("Total Order Price:");
-		lblTotalOrderPrice.setForeground(new Color(255, 255, 255));
+		lblTotalOrderPrice.setForeground(new Color(0, 0, 0));
 		lblTotalOrderPrice.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblTotalOrderPrice.setBounds(46, 429, 149, 38);
 		contentPane.add(lblTotalOrderPrice);
 		
 		JLabel lblProfitAndLoss = new JLabel("3 Months Profit And Loss");
-		lblProfitAndLoss.setForeground(new Color(255, 255, 255));
+		lblProfitAndLoss.setForeground(new Color(0, 0, 0));
 		lblProfitAndLoss.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
 		lblProfitAndLoss.setBounds(140, 79, 243, 38);
 		contentPane.add(lblProfitAndLoss);
 		
 		JLabel lblProfit = new JLabel("Profit");
-		lblProfit.setForeground(new Color(255, 255, 255));
+		lblProfit.setForeground(new Color(0, 0, 0));
 		lblProfit.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
 		lblProfit.setBounds(81, 512, 62, 38);
 		contentPane.add(lblProfit);
 		
 		JLabel lblLoss = new JLabel("Loss");
-		lblLoss.setForeground(new Color(255, 255, 255));
+		lblLoss.setForeground(new Color(0, 0, 0));
 		lblLoss.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
 		lblLoss.setBounds(317, 512, 62, 38);
 		contentPane.add(lblLoss);
-		Border b = BorderFactory.createLineBorder(Color.white);
+		Border b = BorderFactory.createLineBorder(Color.black);
 		
 		lblPurchase = new JLabel("");
-		lblPurchase.setForeground(new Color(255, 255, 255));
+		lblPurchase.setForeground(new Color(0, 0, 0));
 		lblPurchase.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblPurchase.setBounds(244, 179, 164, 38);
 		lblPurchase.setBorder(b);
 		contentPane.add(lblPurchase);
 		
 		lblDelivery = new JLabel("");
-		lblDelivery.setForeground(new Color(255, 255, 255));
+		lblDelivery.setForeground(new Color(0, 0, 0));
 		lblDelivery.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblDelivery.setBounds(244, 231, 164, 38);
 		lblDelivery.setBorder(b);
 		contentPane.add(lblDelivery);
 		
 		lblSale = new JLabel("");
-		lblSale.setForeground(new Color(255, 255, 255));
+		lblSale.setForeground(new Color(0, 0, 0));
 		lblSale.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblSale.setBounds(244, 364, 164, 38);
 		lblSale.setBorder(b);
 		contentPane.add(lblSale);
 		
 		lblOrder = new JLabel("");
-		lblOrder.setForeground(new Color(255, 255, 255));
+		lblOrder.setForeground(new Color(0, 0, 0));
 		lblOrder.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblOrder.setBounds(244, 429, 164, 38);
 		lblOrder.setBorder(b);
 		contentPane.add(lblOrder);
 		
 		lblProfit1 = new JLabel("0");
-		lblProfit1.setForeground(new Color(255, 255, 255));
+		lblProfit1.setForeground(new Color(0, 0, 0));
 		lblProfit1.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblProfit1.setBounds(61, 555, 82, 38);
 		lblProfit1.setBorder(b);
 		contentPane.add(lblProfit1);
 		
 		lblLoss1 = new JLabel("0");
-		lblLoss1.setForeground(new Color(255, 255, 255));
+		lblLoss1.setForeground(new Color(0, 0, 0));
 		lblLoss1.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblLoss1.setBounds(297, 555, 82, 38);
 		lblLoss1.setBorder(b);
@@ -168,19 +171,19 @@ public class Profit_LossView extends JFrame {
 		contentPane.add(lblPhoto1);
 		
 		JLabel lblOutgo = new JLabel("Outcome");
-		lblOutgo.setForeground(Color.WHITE);
+		lblOutgo.setForeground(new Color(0, 0, 0));
 		lblOutgo.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
 		lblOutgo.setBounds(206, 131, 91, 38);
 		contentPane.add(lblOutgo);
 		
 		JLabel Earnings = new JLabel("Earnings");
-		Earnings.setForeground(Color.WHITE);
+		Earnings.setForeground(new Color(0, 0, 0));
 		Earnings.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
 		Earnings.setBounds(191, 318, 91, 38);
 		contentPane.add(Earnings);
 		
 		lblDate = new JLabel("");
-		lblDate.setForeground(Color.WHITE);
+		lblDate.setForeground(new Color(0, 0, 0));
 		lblDate.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
 		lblDate.setBounds(8, 14, 91, 38);
 		lblDate.setBorder(b);
@@ -214,7 +217,12 @@ public class Profit_LossView extends JFrame {
         // Update the selected month label
         date d = new date();
 		lblDate.setText(d.getMySQLDateFormat());
+		
+		lblBg = new JLabel("");
+		lblBg.setBounds(0, 0, 481, 607);
+		contentPane.add(lblBg);
 		defaultZero();
+		displayImg();
 	}
 	
 	public void caculateProfitAndLoss() {
@@ -362,4 +370,10 @@ public class Profit_LossView extends JFrame {
      	lblProfit1.setText("0");
      	lblLoss1.setText("0");
 	 }
+	 
+		public void displayImg() {
+			ImageIcon imgIco = new ImageIcon(getClass().getResource("/My_Img/profit.jpeg"));
+			Image img = imgIco.getImage().getScaledInstance(lblBg.getWidth(), lblBg.getHeight(), Image.SCALE_SMOOTH);
+			lblBg.setIcon(new ImageIcon(img));
+		}
 }
