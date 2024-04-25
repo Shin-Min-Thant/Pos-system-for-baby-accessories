@@ -12,6 +12,7 @@ import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import Connection.ClsDBConnection;
+import Model.CustomerModel;
 import Model.ItemModel;
 import Model.OrderDetailModel;
 import Model.OrderModel;
@@ -125,6 +126,15 @@ public class OrderDetailController {
         	ItemController ic = new ItemController();
         	im.setItem_id(odm.getItem_id());
         	odm.setItem_name(ic.searchItemName(im));
+        	
+        	OrderController oc = new OrderController();
+        	OrderModel om = new OrderModel();
+        	om.setOrder_id(odm.getOrder_id());
+        	om.setCustomer_id(oc.searchCustomerID(om));
+        	CustomerController cc = new CustomerController();
+        	CustomerModel cm = new CustomerModel();
+        	cm.setCustomer_id(om.getCustomer_id());
+        	odm.setAddress(cc.searchCustomerAddress(cm));
         	list.add(odm);
         }
 		return list;

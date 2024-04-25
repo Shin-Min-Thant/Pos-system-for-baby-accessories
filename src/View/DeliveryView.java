@@ -75,7 +75,7 @@ public class DeliveryView extends JFrame {
 	private JButton btnDelete;
 	private JLabel lbItemName;
 	private JLabel lblQty;
-	private JLabel lblPrice;
+	private JLabel lblOrderAddress;
 	private JButton btnSave;
 	private JButton btnClose;
 	private JLabel lblTotalAmount;
@@ -309,9 +309,9 @@ public class DeliveryView extends JFrame {
 						for (OrderDetailModel c : list) {
 							lblOrderID.setText(c.getOrder_id());
 							lbItemName.setText(String.valueOf(c.getItem_name()));
-							lblPrice.setText(String.valueOf(c.getOrder_price()));
+							lblOrderAddress.setText(String.valueOf(c.getAddress()));
 							lblQty.setText(String.valueOf(c.getOrder_qty()));
-							lblFees.setText("3000 Kyats");
+							lblFees.setText("3000");
 						}
 
 					} catch (SQLException e1) {
@@ -327,10 +327,10 @@ public class DeliveryView extends JFrame {
 		cboOrderID.setBounds(304, 10, 156, 25);
 		panel_1.add(cboOrderID);
 
-		JLabel lblItemInfo_1_2 = new JLabel("Price:");
+		JLabel lblItemInfo_1_2 = new JLabel("Order Address:");
 		lblItemInfo_1_2.setForeground(new Color(255, 255, 255));
 		lblItemInfo_1_2.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
-		lblItemInfo_1_2.setBounds(360, 108, 60, 17);
+		lblItemInfo_1_2.setBounds(326, 121, 113, 17);
 		panel_1.add(lblItemInfo_1_2);
 
 		btnAdd = new JButton("Delivery");
@@ -411,12 +411,12 @@ public class DeliveryView extends JFrame {
 		lblQty.setBorder(b);
 		panel_1.add(lblQty);
 
-		lblPrice = new JLabel("");
-		lblPrice.setForeground(new Color(255, 255, 255));
-		lblPrice.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
-		lblPrice.setBounds(430, 110, 156, 28);
-		lblPrice.setBorder(b);
-		panel_1.add(lblPrice);
+		lblOrderAddress = new JLabel("");
+		lblOrderAddress.setForeground(new Color(255, 255, 255));
+		lblOrderAddress.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
+		lblOrderAddress.setBounds(430, 110, 156, 28);
+		lblOrderAddress.setBorder(b);
+		panel_1.add(lblOrderAddress);
 
 		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
@@ -483,7 +483,7 @@ public class DeliveryView extends JFrame {
 								
 								Loss_ProfitController pfc = new Loss_ProfitController();
 								loss_profitModel plm = new loss_profitModel();
-								plm.setTotal_delivery(odm.getDelive_fees());
+								plm.setTotal_delivery(lblTotalAmount.getText());
 								try {
 									save = pfc.insertDelivery(plm);
 								} catch (FileNotFoundException e1) {
@@ -523,16 +523,16 @@ public class DeliveryView extends JFrame {
 		btnClose.setBounds(178, 657, 95, 36);
 		contentPane_1.add(btnClose);
 
-		JLabel lblItemInfo_1_3 = new JLabel("Total Amount:");
+		JLabel lblItemInfo_1_3 = new JLabel("Total Deli Fees:");
 		lblItemInfo_1_3.setForeground(new Color(255, 255, 255));
 		lblItemInfo_1_3.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
-		lblItemInfo_1_3.setBounds(281, 667, 95, 17);
+		lblItemInfo_1_3.setBounds(281, 667, 110, 17);
 		contentPane_1.add(lblItemInfo_1_3);
 
 		lblTotalAmount = new JLabel("0 Kyat");
 		lblTotalAmount.setForeground(new Color(255, 255, 255));
 		lblTotalAmount.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
-		lblTotalAmount.setBounds(384, 661, 83, 28);
+		lblTotalAmount.setBounds(399, 661, 83, 28);
 		contentPane_1.add(lblTotalAmount);
 		
 		scrollPane_1 = new JScrollPane();
@@ -549,7 +549,7 @@ public class DeliveryView extends JFrame {
 				r = tblDelivery.getSelectedRow();
 				cboOrderID.setSelectedItem(tblDelivery.getValueAt(r, 1));
 				lbItemName.setText((String) tblDelivery.getValueAt(r, 2));
-				lblPrice.setText((String) tblDelivery.getValueAt(r, 3));
+				lblOrderAddress.setText((String) tblDelivery.getValueAt(r, 3));
 				lblQty.setText((String) tblDelivery.getValueAt(r, 4));
 				btnAdd.setEnabled(false);
 				btnSave.setEnabled(false);
@@ -590,7 +590,7 @@ public class DeliveryView extends JFrame {
 		JLabel lblItemInfo_1_2_1 = new JLabel("Deli Fees:");
 		lblItemInfo_1_2_1.setForeground(Color.WHITE);
 		lblItemInfo_1_2_1.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
-		lblItemInfo_1_2_1.setBounds(344, 62, 76, 17);
+		lblItemInfo_1_2_1.setBounds(326, 62, 76, 17);
 		panel_1.add(lblItemInfo_1_2_1);
 		
 		lblFees = new JLabel("");
@@ -659,11 +659,11 @@ public class DeliveryView extends JFrame {
 		strdataitem[1] = lblOrderID.getText();
 		vid.addElement(strdataitem[1]);
 		strdataitem[2] = lbItemName.getText();
-		strdataitem[3] = lblPrice.getText();
+		strdataitem[3] = lblOrderAddress.getText();
 		strdataitem[4] = lblQty.getText();
 		strdataitem[5] =(String)cboOrderID.getSelectedItem();
 		strdataitem[6] = lblFees.getText();
-		vamount.addElement(strdataitem[3]);
+		vamount.addElement(strdataitem[6]);
 		vqty.addElement(strdataitem[4]);
 		System.out.println(vqty);
 		dtm.addRow(strdataitem);
@@ -673,7 +673,7 @@ public class DeliveryView extends JFrame {
 
 	public void clearItem() {
 		lbItemName.setText("");
-		lblPrice.setText("");
+		lblOrderAddress.setText("");
 		lblQty.setText("");
         lblOrderID.setText("");
 		cboOrderID.setSelectedIndex(0);
@@ -703,7 +703,7 @@ public class DeliveryView extends JFrame {
 		lblPhone.setText("");
         lblCapacity.setText("");
 		lbItemName.setText("");
-		lblPrice.setText("");
+		lblOrderAddress.setText("");
 		lblTotal_Qty.setText("");
 		lblTotalAmount.setText("");
 		lblFees.setText("");

@@ -12,6 +12,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import Connection.ClsDBConnection;
 import Model.BrandModel;
+import Model.CustomerModel;
 import Model.ItemModel;
 import Model.OrderModel;
 import Model.TypeModel;
@@ -127,24 +128,26 @@ public class OrderController {
 		return list;
 	}
 	
-	public String searchOrderId(OrderModel dain) {
-		String result = null;
-		String sql = "select order_id from pos_baby.order where order_date=?";
+	public String searchCustomerID(OrderModel dain) {
+		String name = null;
+		String sql = "select customer_id from pos_baby.order where order_id=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
-			ps.setString(1,dain.getOrder_date());
+			ps.setString(1, dain.getOrder_id());
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				result = rs.getString("order_id");
-			}else{
-				System.out.println("This order is not found");
+				name = rs.getString("customer_id");
+			}else {
+				System.out.println("Customer Name is not found");
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return result;
+
+		return name;
 	}
+	
 	
 	public boolean isduplicate(OrderModel dain) throws SQLException{
 		boolean duplicate = false;

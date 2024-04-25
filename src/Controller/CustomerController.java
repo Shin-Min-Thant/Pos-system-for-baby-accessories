@@ -184,6 +184,26 @@ public class CustomerController {
 		return name;
 	}
 	
+	public String searchCustomerAddress(CustomerModel dain) {
+		String name = null;
+		String sql = "select address from pos_baby.customer where customer_id=?";
+		try {
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
+			ps.setString(1, dain.getCustomer_id());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				name = rs.getString("address");
+			}else {
+				System.out.println("Customer Name is not found");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return name;
+	}
+	
 	public String searchCustomerId(CustomerModel dain) {
 		String name = null;
 		String sql = "select customer_id from pos_baby.customer where name=?";

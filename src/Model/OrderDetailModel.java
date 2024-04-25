@@ -9,6 +9,13 @@ public class OrderDetailModel {
 	private String customer_name;
 	private int unique;
 	private String status;
+	private String address;
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getStatus() {
 		return status;
 	}

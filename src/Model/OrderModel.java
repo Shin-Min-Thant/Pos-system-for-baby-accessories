@@ -4,7 +4,6 @@ public class OrderModel {
 	private String order_id;
 	private String customer_id;
 	private String order_date;
-	
 	public String getOrder_id() {
 		return order_id;
 	}
