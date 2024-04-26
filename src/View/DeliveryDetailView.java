@@ -171,7 +171,7 @@ public class DeliveryDetailView extends JFrame {
 			for(DeliveryDetailModel sm:list) {
 				data[0] = sm.getDelivery_id();
 				data[1] = sm.getItem_name();
-				data[2] = sm.getDelivery_price()+"";
+				data[2] = sm.getDelive_fees()+"";
 				data[3] = sm.getDelivery_qty()+"";
 				dtm.addRow(data);
 			}
