@@ -337,11 +337,10 @@ public class DeliveryView extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 //			String qty = lblQty.getText().trim();
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(cboOrderID.getSelectedIndex());
 				if (cboOrderID.getSelectedIndex() == 0) {
 					JOptionPane.showMessageDialog(null, "You must choose Order Item ID!");
 					cboOrderID.requestFocus();
-				} else if (Checking.IsContain(strdataitem[1], vid)) {
+				} else if (Checking.IsContain(cboOrderID.getSelectedItem().toString(), vid)) {
 					JOptionPane.showMessageDialog(null, "The order you selected is already existed!");
 					cboOrderID.requestFocus();
 					clearItem();
@@ -545,10 +544,11 @@ public class DeliveryView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				r = tblDelivery.getSelectedRow();
-				cboOrderID.setSelectedItem(tblDelivery.getValueAt(r, 1));
+				lblOrderID.setText((String)tblDelivery.getValueAt(r, 1));;
 				lbItemName.setText((String) tblDelivery.getValueAt(r, 2));
 				lblOrderAddress.setText((String) tblDelivery.getValueAt(r, 3));
 				lblQty.setText((String) tblDelivery.getValueAt(r, 4));
+				lblFees.setText(tblDelivery.getValueAt(r, 6).toString());
 				btnAdd.setEnabled(false);
 				btnSave.setEnabled(false);
 				btnDelete.setEnabled(true);
@@ -655,7 +655,7 @@ public class DeliveryView extends JFrame {
 		
 		strdataitem[0] = String.valueOf(vid.size()+1);
 		strdataitem[1] = lblOrderID.getText();
-		vid.addElement(strdataitem[1]);
+		vid.addElement(cboOrderID.getSelectedItem().toString());
 		strdataitem[2] = lbItemName.getText();
 		strdataitem[3] = lblOrderAddress.getText();
 		strdataitem[4] = lblQty.getText();

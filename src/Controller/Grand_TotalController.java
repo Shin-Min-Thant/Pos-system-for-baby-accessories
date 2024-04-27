@@ -65,6 +65,7 @@ public class Grand_TotalController {
 			gm.setGrand_order(rs.getString("grand_order"));
 			gm.setLoss(rs.getString("loss"));
 			gm.setProfit(rs.getString("profit"));
+			gm.setDate(rs.getString("date"));
 			list.add(gm);
 		}
 		

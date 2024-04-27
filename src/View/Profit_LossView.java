@@ -193,9 +193,46 @@ public class Profit_LossView extends JFrame {
 		lblDate = new JLabel("");
 		lblDate.setForeground(new Color(0, 0, 0));
 		lblDate.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
-		lblDate.setBounds(8, 14, 91, 38);
+		lblDate.setBounds(8, 14, 135, 34);
 		lblDate.setBorder(b);
 		contentPane.add(lblDate);
+		
+		btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				   java.util.Calendar calendar = java.util.Calendar.getInstance();
+	                int currentDay = calendar.get(java.util.Calendar.DAY_OF_MONTH);
+	                
+	                // Get the last day of the month
+	                int lastDayOfMonth = calendar.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
+	                if(lblPurchase.getText().toString().equals("0") || lblSale.getText().toString().equals("0") ||
+	                		lblDelivery.getText().toString().equals("0") ||lblOrder.getText().toString().equals("0")) {
+	                	
+	                }else {
+	                	if(JOptionPane.showConfirmDialog(null, "Are you sure to Save?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) {
+	                	if (currentDay == lastDayOfMonth) {
+	                        // Perform the save operation
+	                        Grand_TotalController gtc = new Grand_TotalController();
+	                        Grand_TotalModel gtm = new Grand_TotalModel();
+	                        gtm.setGrand_purchase(lblPurchase.getText());
+	                        gtm.setGrand_delivery(lblDelivery.getText());
+	                        gtm.setGrand_sale(lblSale.getText());
+	                        gtm.setGrand_order(lblOrder.getText());
+	                        gtm.setLoss(lblLoss1.getText());
+	                        gtm.setProfit(lblProfit1.getText());
+	                        gtc.insert(gtm);
+	                        JOptionPane.showMessageDialog(null, "Save Successfully");
+
+	                    } else {
+	                        // Show message dialog if the current day is not the last day of the month
+	                        JOptionPane.showMessageDialog(null, "You can only save on the last day of the month.");
+	                    }
+	                }
+			}}
+		});
+		btnSave.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 13));
+		btnSave.setBounds(390, 564, 83, 25);
+		contentPane.add(btnSave);
 		
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    int centerX = (int) (screenDimension.getWidth() - getWidth()) / 2;
@@ -223,7 +260,12 @@ public class Profit_LossView extends JFrame {
 						e1.printStackTrace();
 					}
 				 }
-
+				 
+				   if (currentMonth != selectedMonthIndex) {
+			            btnSave.setEnabled(false);
+			        } else {
+			            btnSave.setEnabled(true); // Enable btnSave if the current month matches selected month
+			        }
 
 				
 			}
@@ -237,58 +279,16 @@ public class Profit_LossView extends JFrame {
 		cboMonth.setSelectedIndex(currentMonthIndex);
 		contentPane.add(cboMonth);
 		
-
-        // Update the selected month label
-        date d = new date();
-		lblDate.setText(d.getMySQLDateFormat());
-		
 		lblSearchByMonth = new JLabel("Search by month");
 		lblSearchByMonth.setForeground(Color.BLACK);
 		lblSearchByMonth.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
 		lblSearchByMonth.setBounds(162, 13, 164, 38);
 		contentPane.add(lblSearchByMonth);
 		
-		btnSave = new JButton("Save");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				   java.util.Calendar calendar = java.util.Calendar.getInstance();
-	                int currentDay = calendar.get(java.util.Calendar.DAY_OF_MONTH);
-	                
-	                // Get the last day of the month
-	                int lastDayOfMonth = calendar.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
-	                if(lblPurchase.getText().toString().equals("0") || lblSale.getText().toString().equals("0") ||
-	                		lblDelivery.getText().toString().equals("0") ||lblOrder.getText().toString().equals("0")) {
-	                	
-	                }else {
-	                	if(JOptionPane.showConfirmDialog(null, "Are you sure to Save?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) {
-	                	if (currentDay != lastDayOfMonth) {
-	                        // Perform the save operation
-	                        Grand_TotalController gtc = new Grand_TotalController();
-	                        Grand_TotalModel gtm = new Grand_TotalModel();
-	                        gtm.setGrand_purchase(lblPurchase.getText());
-	                        gtm.setGrand_delivery(lblDelivery.getText());
-	                        gtm.setGrand_sale(lblSale.getText());
-	                        gtm.setGrand_order(lblOrder.getText());
-	                        gtm.setLoss(lblLoss1.getText());
-	                        gtm.setProfit(lblProfit1.getText());
-	                        gtc.insert(gtm);
-	                        JOptionPane.showMessageDialog(null, "Save Successfully");
-
-	                    } else {
-	                        // Show message dialog if the current day is not the last day of the month
-	                        JOptionPane.showMessageDialog(null, "You can only save on the last day of the month.");
-	                    }
-	                }
-			}}
-		});
-		btnSave.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 13));
-		btnSave.setBounds(390, 564, 83, 25);
-		contentPane.add(btnSave);
 		
 		lblBg = new JLabel("");
 		lblBg.setBounds(0, 0, 481, 607);
 		contentPane.add(lblBg);
-//		defaultZero();
 		displayImg();
 		
 	}
@@ -426,6 +426,7 @@ public class Profit_LossView extends JFrame {
 				data[3] = im.getGrand_order();
 				data[4] = im.getLoss();
 				data[5] = im.getProfit();
+				data[6] = im.getDate();
 			}
 			lblPurchase.setText(data[0]);
 			lblDelivery.setText(data[1]);
@@ -433,6 +434,7 @@ public class Profit_LossView extends JFrame {
 			lblOrder.setText(data[3]);
 			lblLoss1.setText(data[4]);
 			lblProfit1.setText(data[5]);
+			lblDate.setText(data[6]);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -444,6 +446,9 @@ public class Profit_LossView extends JFrame {
 		 int selectedMonthIndex = cboMonth.getSelectedIndex() + 1; // Month index is 0-based
 		 int currentMonth = LocalDate.now().getMonthValue();
 	        if(currentMonth == selectedMonthIndex) {
+	        	  // Update the selected month label
+	             date d = new date();
+	    		 lblDate.setText(d.getMySQLDateFormat());
 	        	 showPurchase();
 	        	 showSale();
 			     showOrder();
@@ -451,7 +456,6 @@ public class Profit_LossView extends JFrame {
 			     caculateProfitAndLoss();
 	        }else {
 	        	defaultZero();
-	        	
 	        }
 	        
 
@@ -459,11 +463,14 @@ public class Profit_LossView extends JFrame {
 	 
 	 public void showRecord() throws SQLException {
 		    Grand_TotalController gtc = new Grand_TotalController();
+		    Grand_TotalModel gtm = new Grand_TotalModel();
 		    int selectedMonthIndex = cboMonth.getSelectedIndex() + 1;
 		    List<Integer> months = gtc.showMonth(selectedMonthIndex );
 		    if(months.contains(selectedMonthIndex)) {
 		        showList();
 		    }else {
+		    	date d = new date();
+	    		lblDate.setText(d.getMySQLDateFormat());
 		    	defaultZero();
 		    }
 		}

@@ -8,6 +8,13 @@ public class Grand_TotalModel {
     private String loss;
     private String profit;
     private String month;
+    private String date;
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public String getMonth() {
 		return month;
 	}

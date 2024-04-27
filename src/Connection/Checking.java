@@ -33,11 +33,13 @@ public class Checking {
 	}
 	
 	public static boolean isPhoneNo(String str) {
-		if(str !=null && str.length()<=11) {
-			return str.startsWith("09");
-		}
-		return false;
+	    if(str != null && str.length() >= 6 && str.length() <= 11) {
+	        // Check if the string starts with "09" and contains only digits
+	        return str.startsWith("09") && str.substring(2).matches("\\d+");
+	    }
+	    return false;
 	}
+
 	
 	public static boolean IsAllDigit(String str) {
 	    for(int i=0; i<str.length(); i++) {

@@ -376,6 +376,10 @@ public class PurchaseView extends JFrame {
 					lblTotalAmount.setText(Checking.Sumamount(vamount, 1)+"Kyats");
 					clearItem();
 					cmbItemName.setSelectedIndex(0);
+					btnAdd.setEnabled(true);
+					btnUpdate.setEnabled(false);
+					btnDelete.setEnabled(false);
+					cmbItemName.setEnabled(true);
 				}
 			}
 		});
@@ -391,11 +395,12 @@ public class PurchaseView extends JFrame {
 				}else {
 					deleteRow();
 					clearItem();
-					cmbItemName.setSelectedIndex(0);
 					lblTotalAmount.setText(Checking.Sumamount(vamount, 1)+"Kyats");
 					btnDelete.setEnabled(false);
 					btnUpdate.setEnabled(false);
 					btnAdd.setEnabled(true);
+					cmbItemName.setEnabled(true);
+					cmbItemName.setSelectedIndex(0);
 				}
 			}
 		});
@@ -512,6 +517,11 @@ public class PurchaseView extends JFrame {
 		contentPane.add(btnSave);
 		
 		btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnClose.setFont(new Font("Pyidaungsu", Font.PLAIN, 15));
 		btnClose.setBounds(177, 630, 95, 36);
 		contentPane.add(btnClose);
@@ -602,7 +612,6 @@ public class PurchaseView extends JFrame {
 		lblItemType.setText("");
 		txtPrice.setText("");
 		txtQty.setText("");
-		cmbItemName.setSelectedIndex(0);
 	}
 	
 	public void itemaddmethod() {

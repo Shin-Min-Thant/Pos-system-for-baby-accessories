@@ -73,10 +73,10 @@ public class ItemController {
 			ps.setInt(4, dain.getPrice());
 			ps.setInt(5, dain.getQty());
 			ps.setString(6, dain.getRemark());
-			ps.setString(7, dain.getItem_id());
+			ps.setString(8, dain.getItem_id());
 			File myFile = new File(path2);
 			FileInputStream is= new FileInputStream(myFile);
-			ps.setBlob(8, is,(int)myFile.length());
+			ps.setBlob(7, is,(int)myFile.length());
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

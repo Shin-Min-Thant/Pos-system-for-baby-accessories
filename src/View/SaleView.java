@@ -400,7 +400,6 @@ public class SaleView extends JFrame {
 				}else {
 					deleteRow();
 					clearItem();
-					clearAll();
 					cboItemID.setSelectedIndex(0);
 					lblTotalAmount.setText(Checking.Sumamount(vamount, 1)+"Kyats");
 					btnDelete.setEnabled(false);

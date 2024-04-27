@@ -313,7 +313,7 @@ public class ItemView extends JFrame {
 					im.setPrice(Integer.parseInt(txtPrice.getText().toString()));
 					im.setQty(0);
 					im.setRemark(txtRemark.getText().toString());
-					
+					lblItemImg.setIcon(null);
 					if(Checking.IsValidName(im.getItem_name())) {
 						JOptionPane.showMessageDialog(null, "Invalid Name!","Fail", JOptionPane.ERROR_MESSAGE);
 						txtItemName.requestFocus(true);
@@ -324,10 +324,11 @@ public class ItemView extends JFrame {
 							rs = ic.update(im,path);
 							if(rs==1) {
 								try {
+									
 									AutoID();
 									clear();
 									showList();
-									JOptionPane.showMessageDialog(null, "Update Successfully","Success", JOptionPane.INFORMATION_MESSAGE);
+									
 
 								} catch (ClassNotFoundException e1) {
 									// TODO Auto-generated catch block
