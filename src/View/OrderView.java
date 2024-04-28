@@ -600,7 +600,7 @@ public class OrderView extends JFrame {
 		panel.add(lblPhoto2);
 		MySqlQueries.addCoboBox("item", "item_id", cboItemID);
 		
-		JLabel lblNewLabel_2 = new JLabel("Our Thingyan Pomotion is ");
+		JLabel lblNewLabel_2 = new JLabel("Our Thingyan Promotion is ");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Rockwell", Font.BOLD, 18));
 		lblNewLabel_2.setBounds(221, 8, 271, 25);

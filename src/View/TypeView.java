@@ -156,6 +156,7 @@ public class TypeView extends JFrame {
 									try {
 										AutoID();
 										showList();
+										clear();
 									} catch (ClassNotFoundException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
@@ -326,7 +327,7 @@ public class TypeView extends JFrame {
 		tblType.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				r = tblType.getSelectedColumn();
+				r = tblType.getSelectedRow();
 				typeID =(String) tblType.getValueAt(r, 0);
 				lblTypeID.setText(typeID);
 				txtTypeName.setText((String)tblType.getValueAt(r, 1));
@@ -341,7 +342,7 @@ public class TypeView extends JFrame {
 		});
 		scrollPane.setViewportView(tblType);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("Type ID:");
+		JLabel lblNewLabel_1_2 = new JLabel("Type Name:");
 		lblNewLabel_1_2.setFont(new Font("Pyidaungsu", Font.BOLD, 15));
 		lblNewLabel_1_2.setBounds(256, 218, 57, 28);
 		contentPane.add(lblNewLabel_1_2);
